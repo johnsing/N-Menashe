@@ -1,0 +1,59 @@
+{
+  "videos": [
+    {
+      "id": "v1",
+      "title": "Introduction to Torah Study",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "duration": "12:34",
+      "views": 15420,
+      "category": "Torah"
+    },
+    {
+      "id": "v2",
+      "title": "The Prophets Explained",
+      "thumbnail": "https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=9bZkp7q19f0",
+      "duration": "18:22",
+      "views": 8930,
+      "category": "Nevi'im"
+    },
+    {
+      "id": "v3",
+      "title": "Psalms of David",
+      "thumbnail": "https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+      "duration": "25:10",
+      "views": 32100,
+      "category": "Ketuvim"
+    },
+    {
+      "id": "v4",
+      "title": "Hebrew Reading Practice",
+      "thumbnail": "https://img.youtube.com/vi/JGwWNGJdvx8/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+      "duration": "15:45",
+      "views": 22150,
+      "category": "Education"
+    },
+    {
+      "id": "v5",
+      "title": "Jewish Art History",
+      "thumbnail": "https://img.youtube.com/vi/RgKAFK5djSk/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=RgKAFK5djSk",
+      "duration": "22:18",
+      "views": 12400,
+      "channel": "N-MENASHE",
+      "category": "Art"
+    },
+    {
+      "id": "v6",
+      "title": "Understanding Prayer",
+      "thumbnail": "https://img.youtube.com/vi/OPf0YbXqDm0/maxresdefault.jpg",
+      "src": "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+      "duration": "19:55",
+      "views": 18700,
+      "category": "Prayer"
+    }
+  ]
+}

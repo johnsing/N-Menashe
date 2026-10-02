@@ -1,0 +1,274 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Torah",
+      "slug": "torah",
+      "icon": "📜",
+      "description": "The Five Books of Moses",
+      "books": [
+        {
+          "id": 1,
+          "name": "Bereshit",
+          "slug": "bereshit",
+          "englishName": "Genesis",
+          "chapters": 50,
+          "verses": 1533,
+          "chaptersData": [
+            {
+              "number": 1,
+              "verses": 31,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ",
+                  "english": "In the beginning God created the heaven and the earth."
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "וְהָאָרֶץ הָיְתָה תֹהוּ וָבֹהוּ וְחֹשֶׁךְ עַל־פְּנֵי תְהוֹם וְרוּחַ אֱלֹהִים מְרַחֶפֶת עַל־פְּנֵי הַמָּיִם",
+                  "english": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters."
+                },
+                { 
+                  "number": 3, 
+                  "hebrew": "וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר",
+                  "english": "And God said, Let there be light: and there was light."
+                },
+                { 
+                  "number": 4, 
+                  "hebrew": "וַיַּרְא אֱלֹהִים אֶת־הָאוֹר כִּי־טוֹב וַיַּבְדֵּל אֱלֹהִים בֵּין הָאוֹר וּבֵין הַחֹשֶׁךְ",
+                  "english": "And God saw the light, that it was good: and God divided the light from the darkness."
+                },
+                { 
+                  "number": 5, 
+                  "hebrew": "וַיִּקְרָא אֱלֹהִים לָאוֹר יוֹם וְלַחֹשֶׁךְ קָרָא לָיְלָה וַיְהִי־עֶרֶב וַיְהִי־בֹקֶר יוֹם אֶחָד",
+                  "english": "And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day."
+                }
+              ]
+            },
+            {
+              "number": 2,
+              "verses": 25,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "וַיְכֻלּוּ הַשָּׁמַיִם וְהָאָרֶץ וְכָל־צְבָאָם",
+                  "english": "Thus the heavens and the earth were finished, and all the host of them."
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "וַיְכַל אֱלֹהִים בַּיּוֹם הַשְּׁבִיעִי מְלַאכְתּוֹ אֲשֶׁר עָשָׂה וַיִּשְׁבֹּת בַּיּוֹם הַשְּׁבִיעִי מִכָּל־מְלַאכְתּוֹ אֲשֶׁר עָשָׂה",
+                  "english": "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made."
+                },
+                { 
+                  "number": 3, 
+                  "hebrew": "וַיְבָרֶךְ אֱלֹהִים אֶת־יוֹם הַשְּׁבִיעִי וַיְקַדֵּשׁ אֹתוֹ כִּי בוֹ שָׁבַת מִכָּל־מְלַאכְתּוֹ אֲשֶׁר־בָּרָא אֱלֹהִים לַעֲשׂוֹת",
+                  "english": "And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made."
+                }
+              ]
+            },
+            {
+              "number": 3,
+              "verses": 24,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "וְהַנָּחָשׁ הָיָה עָרוּם מִכֹּל חַיַּת הַשָּׂדֶה אֲשֶׁר עָשָׂה יְהוָה אֱלֹהִים וַיֹּאמֶר אֶל־הָאִשָּׁה אַף כִּי־אָמַר אֱלֹהִים לֹא תֹאכְלוּ מִכֹּל עֵץ הַגָּן",
+                  "english": "Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?"
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "וַתֹּאמֶר הָאִשָּׁה אֶל־הַנָּחָשׁ מִפְּרִי עֵץ־הַגָּן נֹאכֵל",
+                  "english": "And the woman said unto the serpent, We may eat of the fruit of the trees of the garden:"
+                },
+                { 
+                  "number": 3, 
+                  "hebrew": "וּמִפְּרִי הָעֵץ אֲשֶׁר בְּתוֹךְ־הַגָּן אָמַר אֱלֹהִים לֹא תֹאכְלוּ מִמֶּנּוּ וְלֹא תִגְּעוּ בּוֹ פֶּן־תְּמֻתוּן",
+                  "english": "But of the fruit of the tree which is in the midst of the garden, God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Shemot",
+          "slug": "shemot",
+          "englishName": "Exodus",
+          "chapters": 40,
+          "verses": 1209,
+          "chaptersData": [
+            {
+              "number": 1,
+              "verses": 22,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "וְאֵלֶּה שְׁמוֹת בְּנֵי יִשְׂרָאֵל הַבָּאִים מִצְרָיְמָה אֵת יַעֲקֹב אִישׁ וּבֵיתוֹ בָּאוּ",
+                  "english": "Now these are the names of the children of Israel, which came into Egypt; every man and his household came with Jacob."
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "רְאוּבֵן שִׁמְעוֹן לֵוִי וִיהוּדָה",
+                  "english": "Reuben, Simeon, Levi, and Judah,"
+                },
+                { 
+                  "number": 3, 
+                  "hebrew": "יִשָּׂשכָר זְבוּלֻן וּבְנְיָמִן",
+                  "english": "Issachar, Zebulun, and Benjamin,"
+                },
+                { 
+                  "number": 4, 
+                  "hebrew": "דָּן וְנַפְתָּלִי גָּד וְאָשֵׁר",
+                  "english": "Dan, and Naphtali, Gad, and Asher."
+                },
+                { 
+                  "number": 5, 
+                  "hebrew": "וַיְהִי כָּל־נֶפֶשׁ יֹצְאֵי יֶרֶךְ־יַעֲקֹב שִׁבְעִים נָפֶשׁ וְיוֹסֵף הָיָה בְמִצְרָיִם",
+                  "english": "And all the souls that came out of the loins of Jacob were seventy souls: for Joseph was in Egypt already."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nevi'im",
+      "slug": "neviim",
+      "icon": "⚔️",
+      "description": "The Prophets",
+      "books": [
+        {
+          "id": 6,
+          "name": "Yehoshua",
+          "slug": "yehoshua",
+          "englishName": "Joshua",
+          "chapters": 24,
+          "verses": 658,
+          "chaptersData": [
+            {
+              "number": 1,
+              "verses": 18,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "וַיְהִי אַחֲרֵי מוֹת מֹשֶׁה עֶבֶד יְהוָה וַיֹּאמֶר יְהוָה אֶל־יְהוֹשֻׁעַ בִּן־נוּן מְשָׁרֵת מֹשֶׁה לֵאמֹר",
+                  "english": "Now after the death of Moses the servant of the LORD it came to pass, that the LORD spake unto Joshua the son of Nun, Moses' minister, saying,"
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "מֹשֶׁה עַבְדִּי מֵת וְעַתָּה קוּם עֲבֹר אֶת־הַיַּרְדֵּן הַזֶּה אַתָּה וְכָל־הָעָם הַזֶּה אֶל־הָאָרֶץ אֲשֶׁר אָנֹכִי נֹתֵן לָהֶם לִבְנֵי יִשְׂרָאֵל",
+                  "english": "Moses my servant is dead; now therefore arise, go over this Jordan, thou, and all this people, unto the land which I do give to them, even to the children of Israel."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Shoftim",
+          "slug": "shoftim",
+          "englishName": "Judges",
+          "chapters": 21,
+          "verses": 618,
+          "chaptersData": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ketuvim",
+      "slug": "ketuvim",
+      "icon": "📖",
+      "description": "The Writings",
+      "books": [
+        {
+          "id": 14,
+          "name": "Tehillim",
+          "slug": "tehillim",
+          "englishName": "Psalms",
+          "chapters": 150,
+          "verses": 2461,
+          "chaptersData": [
+            {
+              "number": 1,
+              "verses": 6,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "אַשְׁרֵי הָאִישׁ אֲשֶׁר לֹא הָלַךְ בַּעֲצַת רְשָׁעִים וּבְדֶרֶךְ חַטָּאִים לֹא עָמָד וּבְמוֹשַׁב לֵצִים לֹא יָשָׁב",
+                  "english": "Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful."
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "כִּי אִם בְּתוֹרַת יְהוָה חֶפְצוֹ וּבְתוֹרָתוֹ יֶהְגֶּה יוֹמָם וָלָיְלָה",
+                  "english": "But his delight is in the law of the LORD; and in his law doth he meditate day and night."
+                },
+                { 
+                  "number": 3, 
+                  "hebrew": "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ",
+                  "english": "And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Mishlei",
+          "slug": "mishlei",
+          "englishName": "Proverbs",
+          "chapters": 31,
+          "verses": 915,
+          "chaptersData": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Apocrypha",
+      "slug": "apocrypha",
+      "icon": "📚",
+      "description": "The Apocryphal Books",
+      "books": [
+        {
+          "id": 21,
+          "name": "Tobit",
+          "slug": "tobit",
+          "englishName": "Tobit",
+          "chapters": 14,
+          "verses": 350,
+          "chaptersData": [
+            {
+              "number": 1,
+              "verses": 22,
+              "versesData": [
+                { 
+                  "number": 1, 
+                  "hebrew": "",
+                  "english": "The book of the words of Tobit, son of Tobiel, the son of Ananiel, the son of Aduel, the son of Gabael, of the seed of Asael, of the tribe of Nephthali;"
+                },
+                { 
+                  "number": 2, 
+                  "hebrew": "",
+                  "english": "Who in the time of Enemessar king of the Assyrians was led captive out of Thisbe, which is at the right hand of that city, which is called properly Nephthali in Galilee above Aser."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "name": "Judith",
+          "slug": "judith",
+          "englishName": "Judith",
+          "chapters": 16,
+          "verses": 400,
+          "chaptersData": []
+        }
+      ]
+    }
+  ]
+}
