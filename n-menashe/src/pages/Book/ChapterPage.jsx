@@ -1,9 +1,9 @@
-// pages/ChapterPage.jsx
 import { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { 
-  FiArrowLeft, FiChevronLeft, FiChevronRight, FiSettings, FiCopy
+import {
+  FiArrowLeft, FiChevronLeft, FiChevronRight,
+  FiSettings, FiCopy, FiCheck
 } from 'react-icons/fi'
 import { getBookBySlug, getChapterVerses } from '../../utils/bible'
 
@@ -13,40 +13,41 @@ const fadeIn = keyframes`
 `
 
 const Container = styled.div`
-  max-width: 1000px;
+  max-width: 860px;
   margin: 0 auto;
   animation: ${fadeIn} 0.5s ease-out;
 `
 
-const ReaderHeader = styled.div`
+// ── Sticky Reader Toolbar ────────────────────────────────────────
+const Toolbar = styled.div`
   position: sticky;
-  top: 70px;
+  top: 80px;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.95);
+  background: rgba(16, 16, 16, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 14px;
-  padding: 16px 20px;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+  padding: 12px 18px;
   margin-bottom: 24px;
-  border: 1px solid #2a2a2a;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 
   @media (max-width: 768px) {
-    top: 60px;
-    padding: 12px 16px;
+    top: 68px;
+    padding: 10px 12px;
   }
 
   @media (max-width: 480px) {
-    top: 56px;
-    padding: 10px 12px;
+    top: 62px;
   }
 `
 
-const HeaderLeft = styled.div`
+const ToolbarLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
@@ -54,40 +55,10 @@ const HeaderLeft = styled.div`
   min-width: 0;
 `
 
-const HeaderRight = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`
-
-const BookInfo = styled.div`
-  min-width: 0;
-
-  .book-name {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .chapter-info {
-    color: #888;
-    font-size: 12px;
-  }
-
-  @media (max-width: 480px) {
-    .book-name { font-size: 14px; }
-    .chapter-info { font-size: 11px; }
-  }
-`
-
 const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -96,26 +67,49 @@ const IconButton = styled.button`
   color: #888;
   font-size: 16px;
   transition: all 0.25s ease;
+  flex-shrink: 0;
 
   &:hover:not(:disabled) {
     color: #ffd700;
     border-color: rgba(255, 215, 0, 0.4);
-    background: rgba(255, 215, 0, 0.05);
   }
 
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
   }
+`
+
+const BookInfo = styled.div`
+  min-width: 0;
+
+  .bk-name {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bk-chapter {
+    color: #666;
+    font-size: 12px;
+  }
 
   @media (max-width: 480px) {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    .bk-name { font-size: 14px; }
   }
 `
 
-const LanguageToggle = styled.div`
+const ToolbarRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+`
+
+const LangToggle = styled.div`
   display: flex;
   background: #1a1a1a;
   border-radius: 10px;
@@ -126,29 +120,24 @@ const LanguageToggle = styled.div`
     padding: 6px 14px;
     border-radius: 8px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: #666;
     transition: all 0.25s ease;
 
     &.active {
-      background: rgba(255, 215, 0, 0.15);
-      color: #ffd700;
+      background: linear-gradient(135deg, #ffd700, #f5a623);
+      color: #0a0a0a;
     }
 
-    &:hover:not(.active) {
-      color: #aaa;
-    }
+    &:hover:not(.active) { color: #aaa; }
   }
 
   @media (max-width: 480px) {
-    button {
-      padding: 5px 10px;
-      font-size: 12px;
-    }
+    button { padding: 5px 10px; font-size: 12px; }
   }
 `
 
-const ChapterSelector = styled.div`
+const ChapterSelect = styled.div`
   position: relative;
 
   select {
@@ -163,7 +152,7 @@ const ChapterSelector = styled.div`
     transition: all 0.25s ease;
 
     &:hover { border-color: rgba(255, 215, 0, 0.4); }
-    &:focus { border-color: #ffd700; }
+    &:focus { border-color: #ffd700; outline: none; }
   }
 
   &::after {
@@ -178,63 +167,145 @@ const ChapterSelector = styled.div`
   }
 
   @media (max-width: 480px) {
-    select {
-      padding: 6px 28px 6px 10px;
-      font-size: 12px;
+    select { padding: 6px 26px 6px 10px; font-size: 12px; }
+  }
+`
+
+const SettingsWrapper = styled.div`
+  position: relative;
+`
+
+const SettingsPanel = styled.div`
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 16px;
+  min-width: 220px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+  z-index: 200;
+
+  .setting-label {
+    color: #555;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .font-sizes {
+    display: flex;
+    gap: 6px;
+
+    button {
+      flex: 1;
+      padding: 9px;
+      border-radius: 10px;
+      background: #111;
+      border: 1px solid #2a2a2a;
+      color: #888;
+      transition: all 0.25s ease;
+
+      &:hover { color: #ffd700; }
+
+      &.active {
+        background: rgba(255, 215, 0, 0.15);
+        border-color: #ffd700;
+        color: #ffd700;
+      }
     }
   }
 `
 
-const ReaderContent = styled.div`
-  background: #1a1a1a;
-  border-radius: 16px;
+// ── Reading Area ─────────────────────────────────────────────────
+const ReadingCard = styled.div`
+  position: relative;
+  background: linear-gradient(180deg, #161616 0%, #131313 100%);
   border: 1px solid #2a2a2a;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 40px 44px;
   margin-bottom: 24px;
+  overflow: hidden;
 
-  @media (max-width: 768px) {
-    padding: 20px 16px;
-    border-radius: 12px;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd700, #f5a623);
   }
 
-  @media (max-width: 480px) {
-    padding: 16px 12px;
+  @media (max-width: 768px) {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+`
+
+const ChapterHeading = styled.div`
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #2a2a2a;
+
+  .ch-label {
+    color: #555;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .ch-number {
+    font-size: 40px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700, #f5a623);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  @media (max-width: 768px) {
+    .ch-number { font-size: 30px; }
   }
 `
 
 const VerseList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${props => props.$fontSize === 'large' ? '24px' : '16px'};
+  gap: ${props => props.$fontSize === 'large' ? '26px' : '18px'};
 `
 
 const VerseItem = styled.div`
   display: flex;
   gap: 16px;
-  padding: 16px 20px;
-  border-radius: 12px;
-  background: ${props => props.$highlighted ? 'rgba(255, 215, 0, 0.05)' : 'transparent'};
+  padding: ${props => props.$highlighted ? '18px 20px' : '10px 14px'};
+  border-radius: 14px;
+  background: ${props => props.$highlighted ? 'rgba(255, 215, 0, 0.06)' : 'transparent'};
   border-left: 3px solid ${props => props.$highlighted ? '#ffd700' : 'transparent'};
   transition: all 0.25s ease;
+  cursor: pointer;
   position: relative;
 
   &:hover {
     background: rgba(255, 255, 255, 0.02);
-  }
 
-  &:hover .verse-actions {
-    opacity: 1;
+    .verse-actions { opacity: 1; }
   }
 
   @media (max-width: 768px) {
-    padding: 12px 14px;
+    padding: ${props => props.$highlighted ? '14px 12px' : '8px 8px'};
     gap: 12px;
   }
 
   @media (max-width: 480px) {
-    padding: 10px 8px;
-    gap: 10px;
     flex-direction: column;
+    gap: 8px;
   }
 `
 
@@ -242,28 +313,29 @@ const VerseNumber = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
-  height: 32px;
+  min-width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.25);
   color: #ffd700;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   flex-shrink: 0;
 
   @media (max-width: 480px) {
-    min-width: 26px;
-    height: 26px;
+    min-width: 28px;
+    height: 28px;
     font-size: 11px;
   }
 `
 
 const VerseText = styled.div`
   flex: 1;
-  color: #e0e0e0;
-  line-height: 1.9;
+  color: #e2e2e2;
+  line-height: 1.95;
   font-size: ${props => {
-    switch(props.$fontSize) {
+    switch (props.$fontSize) {
       case 'small': return '15px'
       case 'large': return '22px'
       default: return '18px'
@@ -274,14 +346,14 @@ const VerseText = styled.div`
     direction: rtl;
     text-align: right;
     font-family: 'David', 'SBL Hebrew', 'Noto Serif Hebrew', 'Times New Roman', serif;
-    font-size: ${props.$fontSize === 'small' ? '18px' : props.$fontSize === 'large' ? '26px' : '22px'};
+    font-size: ${props.$fontSize === 'small' ? '19px' : props.$fontSize === 'large' ? '27px' : '23px'};
     line-height: 2.2;
     color: #f5e6b8;
   `}
 
   @media (max-width: 768px) {
     font-size: ${props => {
-      switch(props.$fontSize) {
+      switch (props.$fontSize) {
         case 'small': return '14px'
         case 'large': return '19px'
         default: return '16px'
@@ -293,6 +365,7 @@ const VerseText = styled.div`
     `}
   }
 `
+
 const VerseActions = styled.div`
   display: flex;
   gap: 4px;
@@ -305,8 +378,8 @@ const VerseActions = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border-radius: 8px;
     color: #666;
     font-size: 13px;
@@ -317,20 +390,25 @@ const VerseActions = styled.div`
       color: #ffd700;
     }
   }
+
+  @media (max-width: 480px) {
+    opacity: 1;
+  }
 `
 
-const NavigationBar = styled.div`
+// ── Bottom navigation ────────────────────────────────────────────
+const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding: 16px 20px;
-  background: #1a1a1a;
-  border-radius: 14px;
+  padding: 14px 18px;
+  background: #161616;
+  border-radius: 16px;
   border: 1px solid #2a2a2a;
 
   @media (max-width: 480px) {
-    padding: 12px;
+    padding: 10px 12px;
   }
 `
 
@@ -338,13 +416,13 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 11px 22px;
   background: transparent;
   border: 1px solid #2a2a2a;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #888;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.25s ease;
 
   &:hover:not(:disabled) {
@@ -359,71 +437,40 @@ const NavButton = styled.button`
   }
 
   @media (max-width: 480px) {
-    padding: 8px 12px;
+    padding: 9px 13px;
     font-size: 12px;
   }
 `
 
-const ChapterIndicator = styled.div`
-  color: #888;
+const NavIndicator = styled.div`
+  color: #666;
   font-size: 14px;
   font-weight: 500;
+  text-align: center;
 
-  span {
-    color: #ffd700;
-  }
+  span { color: #ffd700; font-weight: 700; }
 
   @media (max-width: 480px) {
     font-size: 12px;
   }
 `
 
-const SettingsPanel = styled.div`
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  padding: 16px;
-  min-width: 220px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-  z-index: 200;
+const NotFound = styled.div`
+  text-align: center;
+  padding: 80px 20px;
 
-  .setting-label {
-    color: #666;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-
-  .font-sizes {
-    display: flex;
-    gap: 6px;
+  h1 {
+    color: #ffd700;
+    font-size: 28px;
     margin-bottom: 16px;
-
-    button {
-      flex: 1;
-      padding: 8px;
-      border-radius: 8px;
-      background: #111;
-      border: 1px solid #2a2a2a;
-      color: #888;
-      transition: all 0.25s ease;
-
-      &:hover { color: #ffd700; }
-      &.active {
-        background: rgba(255, 215, 0, 0.15);
-        border-color: #ffd700;
-        color: #ffd700;
-      }
-    }
   }
-`
 
-const SettingsWrapper = styled.div`
-  position: relative;
+  a {
+    color: #888;
+    font-size: 14px;
+
+    &:hover { color: #ffd700; }
+  }
 `
 
 const ChapterPage = () => {
@@ -436,6 +483,7 @@ const ChapterPage = () => {
   const [fontSize, setFontSize] = useState('medium')
   const [showSettings, setShowSettings] = useState(false)
   const [highlightedVerse, setHighlightedVerse] = useState(null)
+  const [copiedVerse, setCopiedVerse] = useState(null)
 
   useEffect(() => {
     const load = () => {
@@ -443,17 +491,20 @@ const ChapterPage = () => {
       setBook(b)
       setVerses(getChapterVerses(bookSlug, parseInt(chapterNumber)))
       setLoading(false)
+      setHighlightedVerse(null)
     }
     load()
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [bookSlug, chapterNumber])
 
-  // Close settings on outside click
   useEffect(() => {
     if (!showSettings) return
     const handleClick = () => setShowSettings(false)
-    setTimeout(() => document.addEventListener('click', handleClick), 0)
-    return () => document.removeEventListener('click', handleClick)
+    const timer = setTimeout(() => document.addEventListener('click', handleClick), 0)
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('click', handleClick)
+    }
   }, [showSettings])
 
   const currentChapter = parseInt(chapterNumber)
@@ -466,16 +517,20 @@ const ChapterPage = () => {
   }
 
   if (loading) {
-    return <Container>Loading...</Container>
+    return (
+      <Container style={{ color: '#888', textAlign: 'center', padding: 60 }}>
+        Loading...
+      </Container>
+    )
   }
 
   if (!book) {
     return (
       <Container>
-        <h1 style={{ color: '#ffd700', textAlign: 'center' }}>Chapter not found</h1>
-        <Link to="/library" style={{ color: '#888', display: 'block', textAlign: 'center', marginTop: 20 }}>
-          Back to Library
-        </Link>
+        <NotFound>
+          <h1>Chapter not found</h1>
+          <Link to="/library">Back to Library</Link>
+        </NotFound>
       </Container>
     )
   }
@@ -485,10 +540,13 @@ const ChapterPage = () => {
     return verse.english || verse.hebrew || '—'
   }
 
-  const handleCopyVerse = async (verse) => {
+  const handleCopyVerse = async (verse, e) => {
+    e.stopPropagation()
     const text = `${book.name} ${currentChapter}:${verse.number} — ${getVerseText(verse)}`
     try {
       await navigator.clipboard.writeText(text)
+      setCopiedVerse(verse.number)
+      setTimeout(() => setCopiedVerse(null), 1500)
     } catch (error) {
       console.error('Could not copy verse:', error)
     }
@@ -496,35 +554,35 @@ const ChapterPage = () => {
 
   return (
     <Container>
-      <ReaderHeader>
-        <HeaderLeft>
+      <Toolbar>
+        <ToolbarLeft>
           <IconButton as={Link} to={`/book/${bookSlug}`} title="Back to chapters">
             <FiArrowLeft />
           </IconButton>
           <BookInfo>
-            <div className="book-name">{book.name}</div>
-            <div className="chapter-info">Chapter {currentChapter} of {totalChapters}</div>
+            <div className="bk-name">{book.name}</div>
+            <div className="bk-chapter">Chapter {currentChapter} of {totalChapters}</div>
           </BookInfo>
-        </HeaderLeft>
+        </ToolbarLeft>
 
-        <HeaderRight>
-          <LanguageToggle>
-            <button 
+        <ToolbarRight>
+          <LangToggle>
+            <button
               className={language === 'hebrew' ? 'active' : ''}
               onClick={() => setLanguage('hebrew')}
             >
               עברית
             </button>
-            <button 
+            <button
               className={language === 'english' ? 'active' : ''}
               onClick={() => setLanguage('english')}
             >
               EN
             </button>
-          </LanguageToggle>
+          </LangToggle>
 
-          <ChapterSelector>
-            <select 
+          <ChapterSelect>
+            <select
               value={currentChapter}
               onChange={(e) => goToChapter(parseInt(e.target.value))}
             >
@@ -532,12 +590,12 @@ const ChapterPage = () => {
                 <option key={num} value={num}>Ch. {num}</option>
               ))}
             </select>
-          </ChapterSelector>
+          </ChapterSelect>
 
           <SettingsWrapper>
-            <IconButton 
+            <IconButton
               onClick={(e) => { e.stopPropagation(); setShowSettings(!showSettings) }}
-              title="Settings"
+              title="Reader settings"
             >
               <FiSettings />
             </IconButton>
@@ -545,79 +603,90 @@ const ChapterPage = () => {
               <SettingsPanel onClick={(e) => e.stopPropagation()}>
                 <div className="setting-label">Font Size</div>
                 <div className="font-sizes">
-                  <button 
+                  <button
                     className={fontSize === 'small' ? 'active' : ''}
                     onClick={() => setFontSize('small')}
+                    style={{ fontSize: 12 }}
                   >A</button>
-                  <button 
+                  <button
                     className={fontSize === 'medium' ? 'active' : ''}
                     onClick={() => setFontSize('medium')}
+                    style={{ fontSize: 15 }}
                   >A</button>
-                  <button 
+                  <button
                     className={fontSize === 'large' ? 'active' : ''}
                     onClick={() => setFontSize('large')}
+                    style={{ fontSize: 19 }}
                   >A</button>
                 </div>
               </SettingsPanel>
             )}
           </SettingsWrapper>
-        </HeaderRight>
-      </ReaderHeader>
+        </ToolbarRight>
+      </Toolbar>
 
-      <ReaderContent>
+      <ReadingCard>
+        <ChapterHeading>
+          <div className="ch-label">{book.englishName} · {book.name}</div>
+          <div className="ch-number">{currentChapter}</div>
+        </ChapterHeading>
+
         <VerseList $fontSize={fontSize}>
-          {verses.map(verse => (
-            <VerseItem 
-              key={verse.number}
-              $highlighted={highlightedVerse === verse.number}
-              onClick={() => setHighlightedVerse(
-                highlightedVerse === verse.number ? null : verse.number
-              )}
-            >
-              <VerseNumber>{verse.number}</VerseNumber>
-              <VerseText 
-                $isHebrew={language === 'hebrew'}
-                $fontSize={fontSize}
+          {verses.length === 0 ? (
+            <p style={{ color: '#555', textAlign: 'center', padding: '20px 0' }}>
+              No verses available for this chapter yet.
+            </p>
+          ) : (
+            verses.map(verse => (
+              <VerseItem
+                key={verse.number}
+                $highlighted={highlightedVerse === verse.number}
+                onClick={() => setHighlightedVerse(
+                  highlightedVerse === verse.number ? null : verse.number
+                )}
               >
-                {getVerseText(verse)}
-              </VerseText>
-              <VerseActions className="verse-actions">
-                <button
-                  type="button"
-                  title="Copy verse"
-                  aria-label={`Copy verse ${verse.number}`}
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    handleCopyVerse(verse)
-                  }}
+                <VerseNumber>{verse.number}</VerseNumber>
+                <VerseText
+                  $isHebrew={language === 'hebrew'}
+                  $fontSize={fontSize}
                 >
-                  <FiCopy />
-                </button>
-              </VerseActions>
-            </VerseItem>
-          ))}
+                  {getVerseText(verse)}
+                </VerseText>
+                <VerseActions className="verse-actions">
+                  <button
+                    type="button"
+                    title="Copy verse"
+                    aria-label={`Copy verse ${verse.number}`}
+                    onClick={(e) => handleCopyVerse(verse, e)}
+                  >
+                    {copiedVerse === verse.number ? <FiCheck /> : <FiCopy />}
+                  </button>
+                </VerseActions>
+              </VerseItem>
+            ))
+          )}
         </VerseList>
-      </ReaderContent>
+      </ReadingCard>
 
-      <NavigationBar>
-        <NavButton 
+      <NavBar>
+        <NavButton
           disabled={!hasPrev}
           onClick={() => goToChapter(currentChapter - 1)}
         >
           <FiChevronLeft /> Previous
         </NavButton>
 
-        <ChapterIndicator>
+        <NavIndicator>
           Chapter <span>{currentChapter}</span> / {totalChapters}
-        </ChapterIndicator>
+        </NavIndicator>
 
-        <NavButton 
+        <NavButton
           disabled={!hasNext}
           onClick={() => goToChapter(currentChapter + 1)}
         >
           Next <FiChevronRight />
         </NavButton>
-      </NavigationBar>
+      </NavBar>
     </Container>
   )
 }
