@@ -1,6 +1,5 @@
-// AppRouter.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Feed, Home, Library, Audio, Videos,VideoPage, CategoryPage, BookPage, ChapterPage} from '../../pages/index'
+import { Feed, Home, Library, Audio, Videos, VideoPage, CategoryPage, BookPage, ChapterPage, Create } from '../../pages/index'
 import Layout from '../Layout/Layout'
 
 
@@ -17,6 +16,7 @@ const AppRouter = () => (
         <Route path="/video/:id" element={<VideoPage />} />
         <Route path="/audio" element={<Audio/>} />
         <Route path="/feed" element={<Feed/>} />
+        <Route path="/create" element={<Create />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Layout>

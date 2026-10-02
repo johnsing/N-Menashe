@@ -1,4 +1,3 @@
-// pages/Home.jsx
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -130,7 +129,7 @@ const Home = () => {
           A curated collection of digital heritage.
         </Subtitle>
 
-        <CTAButton to="/*">
+        <CTAButton to="/library">
           Explore Gallery
         </CTAButton>
       </HeroSection>
