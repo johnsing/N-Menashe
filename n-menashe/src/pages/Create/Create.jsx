@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { FiUpload, FiImage, FiVideo, FiMusic, FiFileText } from 'react-icons/fi'
 
@@ -178,17 +179,23 @@ const SubmitButton = styled.button`
   }
 `
 
-const ComingSoon = styled.div`
-  text-align: center;
-  padding: 40px 20px;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 16px;
-  color: #666;
-  font-size: 15px;
-`
+const mediaTypes = [
+  { id: 'image', label: 'Image', icon: FiImage },
+  { id: 'video', label: 'Video', icon: FiVideo },
+  { id: 'audio', label: 'Audio', icon: FiMusic },
+  { id: 'document', label: 'Document', icon: FiFileText }
+]
 
 const Create = () => {
+  const [selectedType, setSelectedType] = useState('image')
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [tags, setTags] = useState('')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  }
+
   return (
     <Container>
       <PageHeader>
@@ -196,9 +203,63 @@ const Create = () => {
         <p>Share your content with the community</p>
       </PageHeader>
 
-      <ComingSoon>
-        Content creation is coming soon. This page is under development.
-      </ComingSoon>
+      <UploadCard>
+        <FiUpload className="upload-icon" />
+        <h3>Upload your media</h3>
+        <p>PNG, JPG, MP4, MP3, PDF and more</p>
+      </UploadCard>
+
+      <TypeGrid>
+        {mediaTypes.map(({ id, label, icon: Icon }) => (
+          <TypeCard
+            key={id}
+            type="button"
+            className={selectedType === id ? 'active' : ''}
+            onClick={() => setSelectedType(id)}
+          >
+            <Icon />
+            <span>{label}</span>
+          </TypeCard>
+        ))}
+      </TypeGrid>
+
+      <form onSubmit={handleSubmit}>
+        <FormGroup>
+          <label htmlFor="title">Title</label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            placeholder="Give your content a title"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            placeholder="Tell the community about your content"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <label htmlFor="tags">Tags</label>
+          <input
+            id="tags"
+            type="text"
+            value={tags}
+            onChange={(event) => setTags(event.target.value)}
+            placeholder="nature, design, inspiration"
+          />
+        </FormGroup>
+
+        <SubmitButton type="submit" disabled={!title.trim() || !description.trim()}>
+          Publish
+        </SubmitButton>
+      </form>
     </Container>
   )
 }

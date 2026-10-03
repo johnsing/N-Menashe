@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, Link } from 'react-router-dom'
 import {
   FiGrid, FiVideo, FiMusic, FiFileText, FiBook,
-  FiUsers, FiSettings, FiLogOut, FiMenu, FiX,
+  FiUsers, FiSettings, FiLogOut, FiMenu,
   FiSearch, FiBell, FiChevronDown, FiExternalLink
 } from 'react-icons/fi'
 
@@ -359,7 +359,6 @@ const Content = styled.main`
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const navigate = useNavigate()
 
   const navItems = [
     { to: '/admin', icon: FiGrid, label: 'Dashboard', end: true },
@@ -370,11 +369,6 @@ const AdminLayout = () => {
     { to: '/admin/users', icon: FiUsers, label: 'Users' },
     { to: '/admin/settings', icon: FiSettings, label: 'Settings' },
   ]
-
-  const closeAndGo = (path) => {
-    setSidebarOpen(false)
-    navigate(path)
-  }
 
   return (
     <LayoutWrapper>
