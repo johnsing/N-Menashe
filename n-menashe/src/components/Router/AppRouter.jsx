@@ -1,25 +1,36 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Feed, Home, Library, Audio, Videos, VideoPage, CategoryPage, BookPage, ChapterPage, Create } from '../../pages/index'
+import { AdminLayout, Dashboard } from '../../pages/Admin/index'
 import Layout from '../Layout/Layout'
 
 
 const AppRouter = () => (
   <Router>
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/library" element={<Library/>} />
-        <Route path="/category/:slug" element={<CategoryPage />} />
-        <Route path="/book/:slug" element={<BookPage />} />
-        <Route path="/chapter/:bookSlug/:chapterNumber" element={<ChapterPage />} />
-        <Route path="/videos" element={<Videos/>} />
-        <Route path="/video/:id" element={<VideoPage />} />
-        <Route path="/audio" element={<Audio/>} />
-        <Route path="/feed" element={<Feed/>} />
-        <Route path="/create" element={<Create />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      {/* Admin routes — own layout, no site header/footer */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
+      </Route>
+
+      {/* Site routes */}
+      <Route path="*" element={
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/library" element={<Library/>} />
+            <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/book/:slug" element={<BookPage />} />
+            <Route path="/chapter/:bookSlug/:chapterNumber" element={<ChapterPage />} />
+            <Route path="/videos" element={<Videos/>} />
+            <Route path="/video/:id" element={<VideoPage />} />
+            <Route path="/audio" element={<Audio/>} />
+            <Route path="/feed" element={<Feed/>} />
+            <Route path="/create" element={<Create />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Layout>
+      } />
+    </Routes>
   </Router>
 )
 
