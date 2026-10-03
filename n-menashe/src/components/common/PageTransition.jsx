@@ -1,23 +1,28 @@
 // components/common/PageTransition.jsx
-import { useEffect, useState } from 'react'
+import styled, { keyframes } from 'styled-components'
 
-const PageTransition = ({ children }) => {
-  const [isVisible, setIsVisible] = useState(false)
+const enter = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-  useEffect(() => {
-    setIsVisible(true)
-    return () => setIsVisible(false)
-  }, [])
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
 
-  return (
-    <div style={{
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-      transition: 'opacity 300ms ease, transform 300ms ease'
-    }}>
-      {children}
-    </div>
-  )
-}
+const TransitionContainer = styled.div`
+  animation: ${enter} 300ms ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`
+
+const PageTransition = ({ children }) => (
+  <TransitionContainer>{children}</TransitionContainer>
+)
 
 export default PageTransition
