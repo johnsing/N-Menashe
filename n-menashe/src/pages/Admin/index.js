@@ -1,2 +1,8 @@
 export { default as AdminLayout } from './AdminLayout'
 export { default as Dashboard } from './Dashboard'
+export { default as AdminVideos } from './AdminVideos'
+export { default as AdminAudio } from './AdminAudio'
+export { default as AdminLibrary } from './AdminLibrary'
+export { default as AdminUsers } from './AdminUsers'
+export { default as AdminPosts } from './AdminPosts'
+export { default as AdminSettings } from './AdminSettings'

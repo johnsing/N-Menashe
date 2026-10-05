@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Feed, Home, Library, Audio, Videos, VideoPage, CategoryPage, BookPage, ChapterPage, Create } from '../../pages/index'
-import { AdminLayout, Dashboard } from '../../pages/Admin/index'
+import { AdminLayout, Dashboard, AdminVideos, AdminAudio, AdminPosts, AdminLibrary, AdminUsers, AdminSettings } from '../../pages/Admin/index'
 import Layout from '../Layout/Layout'
 
 
@@ -10,6 +10,12 @@ const AppRouter = () => (
       {/* Admin routes — own layout, no site header/footer */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="videos" element={<AdminVideos />} />
+        <Route path="audio" element={<AdminAudio />} />
+        <Route path="posts" element={<AdminPosts />} />
+        <Route path="library" element={<AdminLibrary />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="settings" element={<AdminSettings />} />
       </Route>
 
       {/* Site routes */}
