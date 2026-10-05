@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Feed, Home, Library, Audio, Videos, VideoPage, CategoryPage, BookPage, ChapterPage, Create } from '../../pages/index'
-import { AdminLayout, Dashboard, AdminVideos, AdminAudio, AdminPosts, AdminLibrary, AdminUsers, AdminSettings } from '../../pages/Admin/index'
+import { Feed, Home, Library, Audio,CategoryPage, BookPage, ChapterPage, Create } from '../../pages/index'
+import { AdminLayout, Dashboard, AdminVideos, AdminAudio, AdminPosts, AdminLibrary, LibraryUpload, AdminUsers, AdminSettings } from '../../pages/Admin/index'
 import Layout from '../Layout/Layout'
 
 
@@ -14,6 +14,8 @@ const AppRouter = () => (
         <Route path="audio" element={<AdminAudio />} />
         <Route path="posts" element={<AdminPosts />} />
         <Route path="library" element={<AdminLibrary />} />
+         <Route path="library/upload" element={<LibraryUpload />} />
+
         <Route path="users" element={<AdminUsers />} />
         <Route path="settings" element={<AdminSettings />} />
       </Route>
@@ -27,8 +29,6 @@ const AppRouter = () => (
             <Route path="/category/:slug" element={<CategoryPage />} />
             <Route path="/book/:slug" element={<BookPage />} />
             <Route path="/chapter/:bookSlug/:chapterNumber" element={<ChapterPage />} />
-            <Route path="/videos" element={<Videos/>} />
-            <Route path="/video/:id" element={<VideoPage />} />
             <Route path="/audio" element={<Audio/>} />
             <Route path="/feed" element={<Feed/>} />
             <Route path="/create" element={<Create />} />

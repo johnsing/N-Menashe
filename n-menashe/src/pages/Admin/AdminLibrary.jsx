@@ -57,7 +57,7 @@ const GhostBtn = styled(Link)`
   }
 `
 
-const PrimaryBtn = styled.button`
+const PrimaryBtn = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -310,7 +310,7 @@ const AdminLibrary = () => {
           <GhostBtn to="/library">
             <FiExternalLink /> View Site Library
           </GhostBtn>
-          <PrimaryBtn><FiPlus /> Add Book</PrimaryBtn>
+          <PrimaryBtn to="/admin/library/upload"><FiPlus /> Add Content</PrimaryBtn>
         </HeadActions>
       </PageHead>
 
@@ -369,5 +369,6 @@ const AdminLibrary = () => {
     </PageWrapper>
   )
 }
+
 
 export default AdminLibrary

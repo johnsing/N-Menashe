@@ -6,3 +6,6 @@ export { default as AdminLibrary } from './AdminLibrary'
 export { default as AdminUsers } from './AdminUsers'
 export { default as AdminPosts } from './AdminPosts'
 export { default as AdminSettings } from './AdminSettings'
+
+
+export { default as LibraryUpload } from './LibraryUpload'
